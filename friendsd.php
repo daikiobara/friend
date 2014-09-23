@@ -7,25 +7,9 @@ if(isset($_GET['return'])){
 
 
 		}else{
-
 			$return = 0;
-
 		}
 
-
-
-?>
-
-
-
-<!DOCTYPE HTML PUBLIC"-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>PHP基礎</title>
-</head>
-<body>
-<?php
 
 	$dsn= 'mysql:dbname=camptest;host=localhost';
 	$user ='root';
@@ -33,7 +17,7 @@ if(isset($_GET['return'])){
 	$dbh =new PDO($dsn, $user, $password);
 	$dbh ->query('SET NAMES utf8');
 
-	$sql = 'SELECT * FROM area_table WHERE id = '.$_GET['id'];
+	$sql = 'SELECT * FROM area_table WHERE id ='.$_GET['id'].';';
 	//area_tableでidが$GETidと同じ物のnameを引き出す。
 	$stmt = $dbh->prepare($sql);
     $stmt->execute();
@@ -42,31 +26,39 @@ if(isset($_GET['return'])){
 
     echo $rec['name'].'<br/>';
 
-    $sql = 'SELECT name FROM `Friend_table` WHERE area_table_id = '.$_GET['id'];
 
-    $stmt_for_name = $dbh->prepare($sql);
-    $stmt_for_name->execute();
+   $sql = 'SELECT * FROM `Friend_table` WHERE area_table_id = '.$_GET['id'];
+
+    $stmt= $dbh->prepare($sql);
+    $stmt->execute();
+
 
     echo '<ul>';
 		while(1){
-			$rec_for_name = $stmt_for_name->fetch(PDO::FETCH_ASSOC);
-				if ($rec_for_name == false){
+			$rec = $stmt->fetch(PDO::FETCH_ASSOC);
+				if ($rec == false){
 				break;
 				}
-				echo '<li>'.$rec_for_name['name'].'</li>';
-			}
-
+				echo '<li>'.$rec['name'].'<form method="post" action="editd.php?id='.$rec['id'].'"><input type="submit" value="編集"></form></li>';
+				}
+				$dsn = null;
+				//データーベースと切断
 	echo '</ul>';
+
 ?>
-	<form method="post" action="addd.php?id=<?php echo $_GET['id'];?>">
-	<input type="submit" value="追加">
 
+<!DOCTYPE HTML PUBLIC"-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>PHP基礎</title>
+</head>
+<body>
+
+	<form method="post" action="addd.php?id=<?php echo $_GET['id']; ?>">
+		<input type="hidden" name="area_table_id" value="<?php echo $area_id; ?>" >
+		<input type="submit" value="追加">
 	</form>
-
-
-
-
-
 
 
 </body>

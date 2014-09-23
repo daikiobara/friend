@@ -4,7 +4,7 @@ $area_id = $_GET['id'];
 
 if(isset($_POST['name'])){
 
-echo'うんち';
+echo'おらら〜';
 
 		$dsn = 'mysql:dbname=camptest;host=localhost';
 		$user = 'root';
@@ -51,18 +51,23 @@ echo $sql;
 
 
 
-	<form method="post" action="addd.php?id=<?php echo $unchi;?>">
-	名前<br/>
-		<input name ="name" type="text" style="width:100px; height:30px;"maxlength="20"><br />
-		性別<br />
-		<input name ="gender" type="text" style="width:200px; height:30px;"maxlength="10"><br />
-		年齢<br />
+	<form method="post" action="addd.php?id=<?php echo $area_id;?>">
+		名前<input name ="name" type="text" style="width:100px"><br />
+		年齢<input name ="age" type="text" style="width:100px"><br />
+		性別<input name ="gender" type="text" style="width:100px"><br />
+		<br />
+  		<FORM ACTION=" " METHOD="POST">
+    		<SELECT NAME="name5">
+        		<option VALUE="1">男
+        		<option VALUE="2">女
+    		</SELECT>
+    	<INPUT TYPE="submit" VALUE="送る">
+    	<INPUT TYPE="reset" VALUE="取消">
+	</FORM>
+<input type="submit" value="送信">
+</form>
 
-		<input name ="age" type="text" style="width:300px; height:30px;"maxlength="10"><br />
 
-		<input type="submit" value="送信">
-
-	</form>
 
 </body>
 </html>

@@ -25,9 +25,8 @@ echo '<ul>';
 	if ($rec == false){
 			break;
 	}
-		
-	echo '<li><a href="friendsd.php?id='.$rec['id'].'">'.$rec['name'].'</a></li>';
 	
+	echo '<li><a href="friendsd.php?id='.$rec['id'].'">'.$rec['name'].'</a></li>';
 
 
 		}
